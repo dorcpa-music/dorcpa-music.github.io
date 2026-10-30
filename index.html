@@ -31,7 +31,8 @@ h1{font-family:var(--f-display);font-weight:900;font-size:clamp(2rem,5vw,3.1rem)
 .kicker{font-size:.95rem;color:#d9cfae;margin-top:8px}
 .kicker b{color:#fff;font-weight:500}
 .chip{display:inline-block;border:1px solid var(--gold-hi);color:var(--gold-hi);border-radius:999px;padding:1px 12px;font-size:.8rem;margin-inline-start:8px}
-main{padding-block:26px 60px;display:grid;gap:34px}
+main{padding-block:26px 60px;display:grid;gap:34px;grid-template-columns:minmax(0,1fr)}
+main>*{min-width:0}
 h2{font-family:var(--f-display);font-weight:700;font-size:1.55rem;margin:0 0 4px;text-wrap:balance}
 .sub{color:var(--muted);font-size:.9rem;margin:0 0 14px}
 .num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
@@ -57,12 +58,17 @@ h2{font-family:var(--f-display);font-weight:700;font-size:1.55rem;margin:0 0 4px
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px;min-width:0}
 .panel h3{margin:0 0 12px;font-family:var(--f-display);font-size:1.15rem}
 .rows{display:grid;gap:7px}
-.row{display:grid;grid-template-columns:minmax(0,9rem) 1fr 4.6rem;gap:10px;align-items:center;font-size:.88rem}
+.row{display:grid;grid-template-columns:minmax(0,10rem) minmax(60px,1fr) 6.2rem;gap:10px;align-items:center;font-size:.88rem}
 .row .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bar{height:12px;background:var(--line);border-radius:2px;position:relative;overflow:hidden}
 .bar i{position:absolute;inset-block:0;right:0;background:var(--own)}
 .bar.gold i{background:var(--gold)}
-.row .v{font-family:var(--f-num);font-size:.8rem;color:var(--muted);text-align:left;direction:ltr}
+.row .v{font-family:var(--f-num);font-size:.8rem;color:var(--muted);text-align:left;white-space:nowrap}
+.row .lbl{unicode-bidi:plaintext;text-align:right}
+td{unicode-bidi:plaintext;text-align:right}
+.panel.wide{grid-column:1/-1}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px 30px}
+.cols h4{margin:0 0 4px;font-size:.85rem;color:var(--muted);font-weight:500}
 /* explorer */
 .tabs{display:flex;gap:4px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
 :root[data-theme="dark"] .tabs{border-color:var(--gold)}
@@ -96,48 +102,48 @@ footer{color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);paddi
     <circle cx="75" cy="75" r="25" fill="#16152b" stroke="#c9a84c" stroke-width="2"/><circle cx="96" cy="66" r="2" fill="#c9a84c"/><circle cx="75" cy="75" r="4" fill="#c9a84c"/></svg></div>
   <div class="htext">
     <h1>האוסף של דורון</h1>
-    <div class="kicker">מול 500 הגדולים של <b>Rolling Stone</b> ו-<b>NME</b> · אלבומים ושירים <span class="chip">עדכון 5 · 30.10.2026</span></div>
+    <div class="kicker">האוסף שלי מול רשימות 500 הגדולים של <bdi><b>Rolling Stone</b></bdi> ושל <bdi><b>NME</b></bdi> <span class="chip">עודכן ב-30.10.2026</span></div>
   </div>
 </div></header>
 
 <main class="wrap">
   <section>
-    <h2>תמונת מצב</h2>
-    <p class="sub">כמה מהקאנון של הביקורת כבר על המדף, ומה עוד חסר.</p>
+    <h2>סיכום</h2>
+    <p class="sub">כמה מהאלבומים והשירים הנחשבים ביותר כבר נמצאים באוסף.</p>
     <div class="ledgers" id="ledgers"></div>
   </section>
 
   <section class="news">
-    <h2 style="font-size:1.25rem">מה חדש בעדכון 5</h2>
+    <h2 style="font-size:1.25rem">מה השתנה בעדכון האחרון</h2>
     <ul>
-      <li><b>Coming Up</b> של Suede (Blu-ray) נוסף לאוסף האישי. <b>Rubber Soul</b> של הביטלס נוסף בתקליט, CD ו-Blu-ray.</li>
-      <li>לראשונה ההצלבה נעשתה גם מול רשימת הרצועות המלאה של האוסף: <b>50 שירים</b> נמצאו בקומפילציות, הופעות ואוספים <span class="tag">+50</span></li>
-      <li>למשל Stand by Me ו-A Change Is Gonna Come מ-The Reunion, Heart of Glass ו-I Will Survive מ-Fantastic 70s, Fix You מ-Live 2012.</li>
-      <li><b>Trash</b> של Suede שויך מחדש לאלבום המקורי Coming Up (1996). השירים באוסף עלו מ-218 ל-269.</li>
+      <li>נוסף לאוסף האלבום <bdi><b>Coming Up</b></bdi> של <bdi>Suede</bdi>, בפורמט <bdi>Blu-ray</bdi>.</li>
+      <li>האלבום <bdi><b>Rubber Soul</b></bdi> של הביטלס נוסף גם בתקליט, בדיסק ובפורמט <bdi>Blu-ray</bdi>.</li>
+      <li>הפעם בדקנו גם את רשימת השירים המלאה של כל אלבום באוסף, ונמצאו עוד <b>50 שירים</b> מהרשימות באוספי להיטים ובאלבומי הופעות. <span class="tag">+50</span></li>
+      <li>מספר השירים מהרשימות שנמצאים באוסף עלה מ-218 ל-269.</li>
     </ul>
   </section>
 
   <section>
-    <h2>מה מספרות הרשימות</h2>
-    <p class="sub">חושב ישירות מקובצי האקסל של עדכון 5.</p>
+    <h2>ניתוח האוסף</h2>
+    <p class="sub">הנתונים נכונים ל-30.10.2026.</p>
     <div class="grid2">
-      <div class="panel"><h3>כיסוי לפי שכבות הפסגה · אלבומים</h3><div class="rows" id="tiers"></div></div>
-      <div class="panel"><h3>אלבומי יהלום · הכי הרבה שירים מהרשימות</h3><div class="rows" id="diamonds"></div></div>
-      <div class="panel"><h3>האמנים החזקים שלך · שירים</h3><p class="sub" style="margin-top:-6px">3+ שירים ברשימות, כיסוי של 70% ומעלה</p><div class="rows" id="strong"></div></div>
-      <div class="panel"><h3>עשורים · כיסוי אלבומים ושירים</h3><div class="rows" id="decades"></div></div>
+      <div class="panel"><h3>כמה מהאלבומים המובילים נמצאים באוסף</h3><div class="rows" id="tiers"></div></div>
+      <div class="panel"><h3>האלבומים שמכילים הכי הרבה שירים מהרשימה</h3><div class="rows" id="diamonds"></div></div>
+      <div class="panel"><h3>אמנים שכמעט כל השירים שלהם באוסף</h3><p class="sub" style="margin-top:-6px">אמנים עם 3 שירים ומעלה ברשימה, שלפחות 70% מהם נמצאים באוסף</p><div class="rows" id="strong"></div></div>
+      <div class="panel wide"><h3>אחוז הכיסוי לפי עשור</h3><div class="cols"><div><h4>אלבומים</h4><div class="rows" id="decA"></div></div><div><h4>שירים</h4><div class="rows" id="decS"></div></div></div></div>
     </div>
   </section>
 
   <section>
-    <h2>הארגזים</h2>
-    <p class="sub">חיפוש לפי שם, אמן או אלבום. המיון לפי הציון הממוצע (נמוך = מוערך יותר).</p>
+    <h2>הרשימות המלאות</h2>
+    <p class="sub">הרשימות ממוינות לפי הדירוג המשולב של שני המגזינים: ככל שהמספר נמוך יותר, היצירה מוערכת יותר.</p>
     <div class="tabs" role="tablist">
-      <button role="tab" id="tab-albums" aria-selected="true" data-tab="albums">785 אלבומי הרשימות</button>
-      <button role="tab" id="tab-songs" aria-selected="false" data-tab="songs">863 השירים</button>
-      <button role="tab" id="tab-personal" aria-selected="false" data-tab="personal">האוסף האישי</button>
+      <button role="tab" id="tab-albums" aria-selected="true" data-tab="albums">אלבומים (785)</button>
+      <button role="tab" id="tab-songs" aria-selected="false" data-tab="songs">שירים (863)</button>
+      <button role="tab" id="tab-personal" aria-selected="false" data-tab="personal">אלבומים נוספים באוסף</button>
     </div>
     <div class="controls">
-      <input id="q" type="search" placeholder="חיפוש: Bowie, Rumours, Wonderwall…" aria-label="חיפוש">
+      <input id="q" type="search" placeholder="חיפוש לפי שם, אמן או אלבום" aria-label="חיפוש">
       <div class="filters" id="filters"></div>
       <span class="count num" id="count"></span>
     </div>
@@ -145,7 +151,8 @@ footer{color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);paddi
     <div class="legend" id="legend"></div>
   </section>
 
-  <footer>מקורות: Rolling Stone 500 Greatest Albums (2020) ו-Songs (2021, עדכון 2024) · NME 500 Greatest Albums (2013) ו-Songs (2014) · יצוא CLZ export_albums (11) ו-(12) מ-30.10.2026. ציון ממוצע: שתי הרשימות = ממוצע הדירוגים; רשימה אחת = (דירוג + 501) ÷ 2.</footer>
+  <footer><p style="margin:0 0 6px">מקורות: רשימות 500 האלבומים ו-500 השירים הגדולים של <bdi>Rolling Stone</bdi> (2020 ו-2021) ושל <bdi>NME</bdi> (2013 ו-2014), ונתוני האוסף מתוכנת <bdi>CLZ</bdi>.</p>
+<p style="margin:0">איך מחושב הדירוג המשולב: אם היצירה מופיעה בשתי הרשימות, זה הממוצע של שני המקומות. אם היא מופיעה רק ברשימה אחת, הרשימה השנייה נספרת כמקום 501.</p></footer>
 </main>
 
 <script>
@@ -161,16 +168,16 @@ const sBoth=S.filter(r=>r[8]&&r[5]&&r[6]).length;
 
 $('#ledgers').innerHTML = `
  <div class="ledger"><h3>אלבומים</h3>
-  <div class="big"><span class="n">${aOwn}</span><span class="of">מתוך <span class="num">785</span> אלבומי הרשימות · ${(aOwn/785*100).toFixed(1)}%</span></div>
+  <div class="big"><span class="n">${aOwn}</span><span class="of">מתוך <span class="num">785</span> אלבומים ברשימה · ${(aOwn/785*100).toFixed(1)}%</span></div>
   <div class="meter"><i style="width:${aOwn/785*100}%;background:var(--own)"></i></div>
-  <div class="facts"><div><b>${P.length}</b><span>אלבומים אישיים</span></div><div><b>${aOwn+P.length}</b><span>סה"כ באוסף</span></div><div><b>${L.filter(r=>r[7]&&r[4]&&r[5]).length}</b><span>מאושרים בשתי הרשימות</span></div></div></div>
+  <div class="facts"><div><b>${P.length}</b><span>אלבומים נוספים</span></div><div><b>${aOwn+P.length}</b><span>סה"כ באוסף</span></div><div><b>${L.filter(r=>r[7]&&r[4]&&r[5]).length}</b><span>מופיעים בשתי הרשימות</span></div></div></div>
  <div class="ledger"><h3>שירים</h3>
-  <div class="big"><span class="n">${sOwn}</span><span class="of">מתוך <span class="num">863</span> שירי הרשימות · ${(sOwn/863*100).toFixed(1)}%</span></div>
+  <div class="big"><span class="n">${sOwn}</span><span class="of">מתוך <span class="num">863</span> שירים ברשימה · ${(sOwn/863*100).toFixed(1)}%</span></div>
   <div class="meter"><i style="width:${(sOwn-sVia)/863*100}%;background:var(--own)"></i><i style="width:${sVia/863*100}%;background:#8fc993"></i></div>
-  <div class="facts"><div><b>${sOwn-sVia}</b><span>דרך האלבום המקורי</span></div><div><b>${sVia}</b><span>דרך אלבום אחר</span></div><div><b>${sBoth}</b><span>מאושרים פעמיים</span></div></div></div>`;
+  <div class="facts"><div><b>${sOwn-sVia}</b><span>באלבום המקורי</span></div><div><b>${sVia}</b><span>באוסף להיטים או בהופעה</span></div><div><b>${sBoth}</b><span>מופיעים בשתי הרשימות</span></div></div></div>`;
 
 const row=(lbl,p,v,gold)=>`<div class="row"><span class="lbl" title="${esc(lbl)}">${esc(lbl)}</span><span class="bar${gold?' gold':''}"><i style="width:${Math.min(100,p)}%"></i></span><span class="v">${v}</span></div>`;
-$('#tiers').innerHTML=[10,25,50,100,200,500].map(n=>{const o=L.slice(0,n).filter(r=>r[7]).length;return row('Top '+n,pct(o,n),`${o}/${n}`,true)}).join('');
+$('#tiers').innerHTML=[10,25,50,100,200,500].map(n=>{const o=L.slice(0,n).filter(r=>r[7]).length;return row(n+' הראשונים',pct(o,n),`${o}/${n}`,true)}).join('');
 
 const src={}; S.filter(r=>r[8]).forEach(r=>{const k=r[10]||r[3]; src[k]=(src[k]||0)+1});
 const di=Object.entries(src).sort((a,b)=>b[1]-a[1]).slice(0,10), dmax=di[0][1];
@@ -184,21 +191,22 @@ const dec=y=>{const n=parseInt(String(y).slice(-4))||parseInt(y);return n?Math.f
 const dl={},dlo={},ds={},dso={};
 L.forEach(r=>{const d=dec(r[3]); if(!d)return; dl[d]=(dl[d]||0)+1; if(r[7]) dlo[d]=(dlo[d]||0)+1});
 S.forEach(r=>{const d=dec(r[4]); if(!d)return; ds[d]=(ds[d]||0)+1; if(r[8]) dso[d]=(dso[d]||0)+1});
-$('#decades').innerHTML=Object.keys({...dl,...ds}).filter(d=>d>=1950).sort().map(d=>{
-  const a=pct(dlo[d]||0,dl[d]||0), s=pct(dso[d]||0,ds[d]||0);
-  return row(`${d}s · אלבומים`,a,`${a}%`)+row(`${d}s · שירים`,s,`${s}%`,true)}).join('');
+const dname=d=>d<2000?`שנות ה-${d%100}`:`שנות ה-${d}`;
+const decs=Object.keys({...dl,...ds}).map(Number).filter(d=>d>=1950).sort();
+$('#decA').innerHTML=decs.filter(d=>dl[d]).map(d=>{const a=pct(dlo[d]||0,dl[d]);return row(dname(d),a,`${a}% (${dlo[d]||0}/${dl[d]})`)}).join('');
+$('#decS').innerHTML=decs.filter(d=>ds[d]).map(d=>{const v=pct(dso[d]||0,ds[d]);return row(dname(d),v,`${v}% (${dso[d]||0}/${ds[d]})`,true)}).join('');
 
 // explorer
 let tab='albums', filt='all';
 const FILTERS={
-  albums:[['all','הכל'],['own','באוסף'],['miss','חסרים'],['both','בשתי הרשימות']],
-  songs:[['all','הכל'],['own','באוסף'],['via','דרך אלבום אחר'],['miss','חסרים'],['bothmiss','בשתי הרשימות וחסרים']],
-  personal:[['all','הכל']]
+  albums:[['all','הכול'],['own','באוסף'],['miss','לא באוסף'],['both','בשתי הרשימות']],
+  songs:[['all','הכול'],['own','באוסף'],['via','באוסף להיטים או בהופעה'],['miss','לא באוסף'],['bothmiss','בשתי הרשימות ולא באוסף']],
+  personal:[['all','הכול']]
 };
 const LEG={
-  albums:'<span><i style="background:var(--own-bg)"></i>באוסף</span><span><i></i>לא באוסף</span>',
-  songs:'<span><i style="background:var(--own-bg)"></i>האלבום המקורי באוסף</span><span><i style="background:var(--via-bg)"></i>דרך אלבום אחר</span><span><i style="background:var(--both-bg)"></i>בשתי הרשימות, חסר</span>',
-  personal:'<span>אלבומים שבאוסף ולא באף אחת מהרשימות, ממוינים לפי אמן</span>'
+  albums:'<span><i style="background:var(--own-bg)"></i>נמצא באוסף</span><span><i></i>לא נמצא באוסף</span>',
+  songs:'<span><i style="background:var(--own-bg)"></i>האלבום המקורי נמצא באוסף</span><span><i style="background:var(--via-bg)"></i>השיר נמצא באוסף להיטים או באלבום הופעה</span><span><i style="background:var(--both-bg)"></i>מופיע בשתי הרשימות ולא נמצא באוסף</span>',
+  personal:'<span>אלבומים שנמצאים באוסף ואינם מופיעים באף אחת מהרשימות. ממוינים לפי שם האמן.</span>'
 };
 const dash=v=>v==null?'—':v;
 function render(){
@@ -209,13 +217,13 @@ function render(){
     tot=L.length;
     const rows=L.filter(r=>m(r[1],r[2],r[3])&&(filt==='all'||(filt==='own'&&r[7])||(filt==='miss'&&!r[7])||(filt==='both'&&r[4]&&r[5])));
     n=rows.length;
-    html='<thead><tr><th class="n">#</th><th>אלבום</th><th>אמן</th><th class="n">שנה</th><th class="n">RS</th><th class="n">NME</th><th class="n">ממוצע</th><th>פורמט</th></tr></thead><tbody>'+
+    html='<thead><tr><th class="n">#</th><th>אלבום</th><th>אמן</th><th class="n">שנה</th><th class="n">RS</th><th class="n">NME</th><th class="n">דירוג משולב</th><th>פורמט</th></tr></thead><tbody>'+
       rows.map(r=>`<tr class="${r[7]?'own':''}"><td class="n">${r[0]}</td><td class="t">${esc(r[1])}</td><td>${esc(r[2])}</td><td class="n">${esc(r[3])}</td><td class="n">${dash(r[4])}</td><td class="n">${dash(r[5])}</td><td class="n">${r[6]}</td><td>${esc(r[8])}</td></tr>`).join('');
   } else if(tab==='songs'){
     tot=S.length;
     const rows=S.filter(r=>m(r[1],r[2],r[3],r[10])&&(filt==='all'||(filt==='own'&&r[8])||(filt==='via'&&r[8]&&r[10])||(filt==='miss'&&!r[8])||(filt==='bothmiss'&&!r[8]&&r[5]&&r[6])));
     n=rows.length;
-    html='<thead><tr><th class="n">#</th><th>שיר</th><th>אמן</th><th>אלבום מקורי</th><th class="n">שנה</th><th class="n">RS</th><th class="n">NME</th><th class="n">ממוצע</th><th>מקור באוסף</th><th>פורמט</th></tr></thead><tbody>'+
+    html='<thead><tr><th class="n">#</th><th>שיר</th><th>אמן</th><th>אלבום מקורי</th><th class="n">שנה</th><th class="n">RS</th><th class="n">NME</th><th class="n">דירוג משולב</th><th>נמצא באוסף ב־</th><th>פורמט</th></tr></thead><tbody>'+
       rows.map(r=>`<tr class="${r[8]?(r[10]?'via':'own'):(r[5]&&r[6]?'both':'')}"><td class="n">${r[0]}</td><td class="t">${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td class="n">${esc(r[4])}</td><td class="n">${dash(r[5])}</td><td class="n">${dash(r[6])}</td><td class="n">${r[7]}</td><td>${esc(r[10])}</td><td>${esc(r[9])}</td></tr>`).join('');
   } else {
     tot=P.length;
@@ -226,7 +234,7 @@ function render(){
       rows.map((r,i)=>`<tr><td class="n">${i+1}</td><td class="t">${esc(r[0])}</td><td>${esc(r[1])}</td><td class="n">${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('');
   }
   $('#t').innerHTML=html+'</tbody>';
-  $('#count').textContent=`${n} מתוך ${tot}`;
+  $('#count').textContent=`מוצגים ${n} מתוך ${tot}`;
 }
 function setTab(t){
   tab=t; filt='all';
