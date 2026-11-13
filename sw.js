@@ -1,5 +1,5 @@
 // Service worker: the site works offline after the first visit.
-const V='1c0b428dcd', CORE='core-'+V, COVERS='covers-v1', EXT='ext-v1';
+const V='cf21976b0c', CORE='core-'+V, COVERS='covers-v1', EXT='ext-v1';
 const CORE_FILES=['./','index.html','t.json','ar.json','manifest.webmanifest','favicon.svg','icon-192.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CORE).then(c=>c.addAll(CORE_FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('core-')&&k!==CORE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
