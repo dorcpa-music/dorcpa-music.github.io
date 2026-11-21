@@ -721,7 +721,8 @@ const LC={"The Beatles|Revolver": "28e2643318", "Nirvana|Nevermind": "1e7b2151fa
 const need=k=>{if(!LAZY[k])return Promise.resolve();if(need[k])return need[k];return need[k]=fetch(BASE+LAZY[k]).then(r=>r.json()).then(j=>{if(k==='TRK')TRK=j;else ARX=j;LAZY[k]=null}).catch(()=>{need[k]=null})};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const CAA=(r,sz)=>{const id=MB[r];return id?`https://coverartarchive.org/release-group/${id}/front-${sz}`:null};
-const img=(key,sz,cls)=>{const id=LC[key],r=COV[key]||CAA(key,sz>250?500:250),u=id?`${BASE}c/${sz>=250?'l':'s'}/${id}.webp`:r;return u?`<img src="${u}"${id&&r?` data-f="${esc(r)}"`:''} alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('${cls||'has-img'}')" onerror="if(this.dataset.f){this.src=this.dataset.f;this.dataset.f=''}else this.remove()">`:''};
+const COVD={};
+const img=(key,sz,cls)=>{const id=LC[key],r=COV[key]||CAA(key,sz>250?500:250),u=(id&&COVD[id])||(id?`${BASE}c/${sz>=250?'l':'s'}/${id}.webp`:r);return u?`<img src="${u}"${id&&r?` data-f="${esc(r)}"`:''} alt="" loading="lazy" decoding="async" onload="this.parentNode.classList.add('${cls||'has-img'}')" onerror="if(this.dataset.f){this.src=this.dataset.f;this.dataset.f=''}else this.remove()">`:''};
 const L=D.L,S=D.S,P=D.P; // L:[#,title,artist,year,rs,nme,avg,own,fmt]  S:[#,title,artist,album,year,rs,nme,avg,own,fmt,via]  P:[title,artist,year,fmt]
 const $=s=>document.querySelector(s);
 const SBYID={};S.forEach(r=>SBYID[r[0]]=r);
