@@ -307,6 +307,13 @@ tr.open .chev{transform:rotate(180deg)}
 .nl-m{display:flex;flex-direction:column;min-width:0;line-height:1.3}
 .nl-m b{font-weight:600}
 .nl-m span{font-size:.84rem;color:var(--muted)}
+.pl-copy{font:inherit;font-weight:700;font-size:1rem;min-height:48px;padding:0 24px;border:0;border-radius:999px;background:#1db954;color:#fff;cursor:pointer;margin-top:14px}
+.pl-copy:hover{filter:brightness(1.07)}
+.pl-list{max-height:640px;overflow:auto;padding-inline-end:6px}
+.pl-list li{grid-template-columns:2rem minmax(0,1fr) auto}
+.pl-list .rkp{font-size:.75rem;color:var(--muted);white-space:nowrap;margin-inline-start:6px}
+#pl-embed iframe{width:100%;height:380px;border:0;border-radius:12px;margin-top:16px}
+#playlist .side{-webkit-text-stroke-color:#1db954}
 /* news */
 .news{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px}
 .news .card b.k{display:block;font-family:var(--f-display);font-weight:900;font-size:2.6rem;color:var(--gold);line-height:1}
@@ -479,6 +486,7 @@ footer{background:#fff}
   <a class="l" href="#about">על האוסף</a>
   <a class="l" href="#wall">מאה הגדולים</a>
   <a class="l" href="#wall-s">מאה השירים</a>
+  <a class="l" href="#playlist">פלייליסט</a>
   <a class="l" href="#side-a">אלבומים</a>
   <a class="l" href="#side-b">שירים</a>
   <a class="l" href="#shelf">מחוץ לרשימות</a>
@@ -582,6 +590,25 @@ footer{background:#fff}
   </div>
   <div class="swall" id="swall"></div>
   <div class="wall-legend"><span><i></i>השיר נמצא באוסף</span><span><i style="background:#16a34a"></i>באלבום המקורי</span><span><i style="background:#86efac"></i>דרך אוסף להיטים או הופעה</span></div>
+</div></section>
+
+<section class="band" id="playlist"><div class="wrap">
+  <div class="sec-head"><div class="side">▶</div><h2>הפלייליסט של דורון</h2><p>מאה השירים המדורגים ביותר מהרשימות שכבר נמצאים באוסף, לפי סדר הדירוג המשולב.</p></div>
+  <div class="grid">
+    <div class="card span-5 pl-how">
+      <h3>איך יוצרים את הפלייליסט ב-Spotify</h3>
+      <p class="note">Spotify לא מאפשרת לאתר ליצור פלייליסט בעצמו, אבל זה לוקח חצי דקה:</p>
+      <ol class="nl">
+        <li><span class="nl-m"><b>לחצו "העתקת כל הקישורים"</b><span>כל השירים מועתקים, לפי הסדר</span></span></li>
+        <li><span class="nl-m"><b>פתחו את Spotify במחשב</b><span>וצרו פלייליסט חדש וריק</span></span></li>
+        <li><span class="nl-m"><b>לחצו בתוך הפלייליסט והדביקו</b><span>Ctrl+V ב-Windows או ⌘+V במק</span></span></li>
+      </ol>
+      <button type="button" class="pl-copy" id="pl-copy">העתקת כל הקישורים</button>
+      <p class="note" id="pl-note" style="margin:10px 0 0"></p>
+      <div id="pl-embed"></div>
+    </div>
+    <div class="card span-7"><h3>השירים <small id="pl-count" style="font-weight:500;color:var(--muted);font-size:.9rem"></small></h3><ol class="nl pl-list" id="pl-list"></ol></div>
+  </div>
 </div></section>
 
 <section class="band" id="side-a"><div class="wrap">
@@ -755,6 +782,7 @@ $('#wallgrid').addEventListener('click',e=>{const b=e.target.closest('.sleeve');
   $('#ws-all').onclick=()=>set(false);$('#ws-own').onclick=()=>set(true);
   $('#swall').addEventListener('click',e=>{const b=e.target.closest('.stile');if(b)openSong(SBYID[b.dataset.s])});
 })();
+
 
 /* ---------- side A ---------- */
 const both=L.filter(r=>r[4]&&r[5]);
@@ -1039,6 +1067,22 @@ $('#tbl').addEventListener('click',e=>{if(e.target.closest('a'))return;const tr=
   tr.after(det);tr.classList.add('open');tr.setAttribute('aria-expanded','true');
 });
 setTab('a');
+/* ---------- playlist ---------- */
+(function(){
+  const PLAYLIST="";
+  const T=S.filter(s=>s[8]).slice(0,100), withLink=T.filter(s=>SPT[s[0]]);
+  $('#pl-count').textContent=`(${T.length})`;
+  $('#pl-list').innerHTML=T.map(s=>`<li data-s="${s[0]}" tabindex="0" data-kbd role="button"><span class="nl-m"><b><bdi>${esc(s[1])}</bdi></b><span><bdi>${esc(s[2])}</bdi><span class="rkp"> · מקום ${s[0]}</span></span></span>${LKS(s)}</li>`).join('');
+  $('#pl-list').addEventListener('click',e=>{if(e.target.closest('a'))return;const li=e.target.closest('li[data-s]');if(li)openSong(SBYID[li.dataset.s])});
+  const miss=T.filter(s=>!SPT[s[0]]);
+  $('#pl-note').textContent=miss.length?`${withLink.length} שירים יועתקו. ל-${miss.map(s=>s[1]).join(', ')} אין קישור ישיר, ואפשר להוסיף ${miss.length>1?'אותם':'אותו'} ידנית מכפתור החיפוש ברשימה.`:'';
+  $('#pl-copy').onclick=()=>{const txt=withLink.map(s=>SPT[s[0]].split('?')[0]).join('\n');
+    const done=()=>toast(`${withLink.length} קישורים הועתקו. עכשיו הדביקו בפלייליסט ב-Spotify`);
+    if(navigator.clipboard)navigator.clipboard.writeText(txt).then(done,()=>prompt('העתיקו:',txt));else prompt('העתיקו:',txt)};
+  if(PLAYLIST){const id=PLAYLIST.split('/playlist/')[1].split('?')[0];
+    $('#pl-embed').innerHTML=`<iframe src="https://open.spotify.com/embed/playlist/${id}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="הפלייליסט ב-Spotify"></iframe><p class="note" style="margin:8px 0 0"><a href="${PLAYLIST}" target="_blank" rel="noopener">לפתיחת הפלייליסט ב-Spotify</a></p>`}
+})();
+
 
 /* random album from the record */
 const OWNED=[...L.filter(r=>r[7]),...P];
