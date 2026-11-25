@@ -1183,13 +1183,13 @@ if('serviceWorker' in navigator&&location.protocol==='https:'&&location.hostname
     if(document.getElementById('join-honey').value) return;
     if(!name){msg.textContent='נא למלא שם';return}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='נא למלא כתובת מייל תקינה';return}
-    btn.disabled=true; msg.textContent='שולח...';
-    fetch('https://formsubmit.co/ajax/doron@ag-cpa.co.il',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    btn.disabled=true; msg.textContent='שולח... זה עשוי לקחת עד חצי דקה';
+    fetch('https://formsubmit.co/ajax/b3d1e8c90a88dbe45d7a9b51494ed25b',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({name:name,email:email,_subject:'הרשמה חדשה לעדכוני האתר: '+name,_template:'table',_captcha:'false',
         'הודעה':'נרשם/ה חדש/ה לרשימת התפוצה של האוסף של דורון. יש להוסיף את הכתובת לקבוצה "רשימת תפוצה עדכונים לאתר".'})})
-    .then(function(r){return r.json().catch(function(){return {}}).then(function(d){if(!r.ok||d.success==='false'||d.success===false)throw 0})})
+    .then(function(r){if(!r.ok)throw 0})
     .then(function(){f.reset();msg.textContent='תודה, '+name+'! נרשמת לעדכונים.'})
-    .catch(function(){msg.textContent='משהו השתבש. אפשר לנסות שוב בעוד רגע.'})
+    .catch(function(){msg.textContent='לא הצלחנו לאשר את ההרשמה. כדאי לנסות שוב בעוד דקה.'})
     .finally(function(){btn.disabled=false});
   });
 })();
