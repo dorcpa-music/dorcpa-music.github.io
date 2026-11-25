@@ -476,6 +476,18 @@ dialog::backdrop{background:rgba(28,20,66,.55)}
 .ar-links a.pri{color:#fff;background:var(--violet);border-color:var(--violet)}
 .artist-link:hover{color:var(--violet);border-bottom-color:var(--violet)}
 footer{background:#fff}
+/* join: mailing-list signup */
+.join{background:linear-gradient(135deg,#5b21d6,#c026d3);color:#fff;border-radius:14px;padding:34px 32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:26px;align-items:center}
+.join h2{font-family:var(--f-display);font-weight:900;font-size:clamp(1.7rem,3.6vw,2.4rem);line-height:1.1;margin:0 0 8px}
+.join p{margin:0;opacity:.92}
+.join form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) auto;gap:10px}
+.join input{font:inherit;font-size:1rem;min-height:48px;padding:0 16px;border:0;border-radius:10px;background:#fff;color:var(--paper);min-width:0}
+.join input[type=email]{direction:ltr;text-align:left}
+.join button{font:inherit;font-weight:700;font-size:1rem;min-height:48px;padding:0 24px;border:0;border-radius:999px;background:var(--sun);color:var(--paper);cursor:pointer;white-space:nowrap}
+.join button[disabled]{opacity:.6;cursor:default}
+.join .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.join .msg{grid-column:1/-1;min-height:1.4em;font-size:.95rem;margin:2px 0 0}
+@media (max-width:820px){.join{grid-template-columns:1fr;padding:26px 20px}.join form{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -492,6 +504,7 @@ footer{background:#fff}
   <a class="l" href="#shelf">מחוץ לרשימות</a>
   <a class="l" href="#news">מה חדש</a>
   <a class="l" href="#library">החיפוש המלא</a>
+  <a class="l" href="#join">עדכונים במייל</a>
 </div></nav>
 
 <header class="hero" id="top"><div class="wrap">
@@ -708,6 +721,18 @@ footer{background:#fff}
   <div class="tbl"><table id="tbl"></table></div>
   <div style="text-align:center;margin-top:16px"><button type="button" class="chip" id="more" hidden>הצג עוד</button></div>
   <div class="lib-legend" id="legend"></div>
+</div></section>
+<section class="band" id="join"><div class="wrap">
+  <div class="join">
+    <div><h2>רוצים לדעת כשיש עדכון?</h2><p>השאירו שם ומייל, ואשלח לכם הודעה בכל פעם שאעלה עדכון לאתר.</p></div>
+    <form id="join-form" novalidate>
+      <input type="text" name="name" id="join-name" placeholder="שם" aria-label="שם" autocomplete="name" required>
+      <input type="email" name="email" id="join-email" placeholder="email@example.com" aria-label="כתובת מייל" autocomplete="email" required>
+      <button type="submit" id="join-btn">הרשמה לעדכונים</button>
+      <div class="hp" aria-hidden="true"><input type="text" name="_honey" id="join-honey" tabindex="-1" autocomplete="off"></div>
+      <p class="msg" id="join-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
 </div></section>
 </main>
 
@@ -1147,5 +1172,27 @@ setTimeout(()=>{need('TRK');need('ARX')},3000);
 if('serviceWorker' in navigator&&location.protocol==='https:'&&location.hostname.endsWith('github.io'))navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 
+<script>
+(function(){
+  var f=document.getElementById('join-form'); if(!f) return;
+  var msg=document.getElementById('join-msg'), btn=document.getElementById('join-btn');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('join-name').value.trim();
+    var email=document.getElementById('join-email').value.trim();
+    if(document.getElementById('join-honey').value) return;
+    if(!name){msg.textContent='נא למלא שם';return}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='נא למלא כתובת מייל תקינה';return}
+    btn.disabled=true; msg.textContent='שולח...';
+    fetch('https://formsubmit.co/ajax/doron@ag-cpa.co.il',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name:name,email:email,_subject:'הרשמה חדשה לעדכוני האתר: '+name,_template:'table',_captcha:'false',
+        'הודעה':'נרשם/ה חדש/ה לרשימת התפוצה של האוסף של דורון. יש להוסיף את הכתובת לקבוצה "רשימת תפוצה עדכונים לאתר".'})})
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(d){if(!r.ok||d.success==='false'||d.success===false)throw 0})})
+    .then(function(){f.reset();msg.textContent='תודה, '+name+'! נרשמת לעדכונים.'})
+    .catch(function(){msg.textContent='משהו השתבש. אפשר לנסות שוב בעוד רגע.'})
+    .finally(function(){btn.disabled=false});
+  });
+})();
+</script>
 </body>
 </html>
