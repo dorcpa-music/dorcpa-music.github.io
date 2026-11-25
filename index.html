@@ -485,7 +485,7 @@ footer{background:#fff}
 .join input[type=email]{direction:ltr;text-align:left}
 .join button{font:inherit;font-weight:700;font-size:1rem;min-height:48px;padding:0 24px;border:0;border-radius:999px;background:var(--sun);color:var(--paper);cursor:pointer;white-space:nowrap}
 .join button[disabled]{opacity:.6;cursor:default}
-.join .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.join .hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none}
 .join .msg{grid-column:1/-1;min-height:1.4em;font-size:.95rem;margin:2px 0 0}
 @media (max-width:820px){.join{grid-template-columns:1fr;padding:26px 20px}.join form{grid-template-columns:1fr}}
 </style>
