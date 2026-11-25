@@ -609,28 +609,9 @@ footer{background:#fff}
   <div class="sec-head"><div class="side">▶</div><h2>הפלייליסט של דורון</h2><p>מאה השירים המדורגים ביותר מהרשימות שכבר נמצאים באוסף, לפי סדר הדירוג המשולב.</p></div>
   <div class="grid">
     <div class="card span-5 pl-how">
-      <div id="pl-oneclick" hidden style="margin-bottom:22px">
-        <h3>בלחיצה אחת, מכל מכשיר</h3>
-        <p class="note">יוצר את הפלייליסט ישירות בחשבון ה-Spotify של דורון, לפי הסדר.</p>
-        <button type="button" class="pl-copy" id="pl-create">יצירת הפלייליסט ב-Spotify</button>
-        <p class="note" id="pl-status" style="margin:10px 0 0"></p>
-      </div>
-      <h3>במחשב (הכי מהיר)</h3>
-      <p class="note">Spotify לא מאפשרת לאתר ליצור פלייליסט בעצמו, אבל זה לוקח חצי דקה:</p>
-      <ol class="nl">
-        <li><span class="nl-m"><b>לחצו "העתקת כל הקישורים"</b><span>כל השירים מועתקים, לפי הסדר</span></span></li>
-        <li><span class="nl-m"><b>פתחו את Spotify במחשב</b><span>וצרו פלייליסט חדש וריק</span></span></li>
-        <li><span class="nl-m"><b>לחצו בתוך הפלייליסט והדביקו</b><span>Ctrl+V ב-Windows או ⌘+V במק</span></span></li>
-      </ol>
-      <button type="button" class="pl-copy" id="pl-copy">העתקת כל הקישורים</button>
-      <h3 style="margin-top:22px">מאייפד או מטלפון</h3>
-      <ol class="nl">
-        <li><span class="nl-m"><b>לחצו "העתקת הרשימה כטקסט"</b><span>שורה לכל שיר: אמן – שם השיר</span></span></li>
-        <li><span class="nl-m"><b>היכנסו ל-TuneMyMusic בספארי</b><span><a href="https://www.tunemymusic.com/transfer/freetext-to-spotify" target="_blank" rel="noopener">tunemymusic.com</a>, האפשרות Free Text, חינם עד 500 שירים</span></span></li>
-        <li><span class="nl-m"><b>הדביקו, בחרו Spotify והתחברו</b><span>בסוף בדקו את רשימת השירים שלא נמצאו ואת הסדר</span></span></li>
-      </ol>
-      <button type="button" class="pl-copy" id="pl-copy-txt" style="background:#5b21d6">העתקת הרשימה כטקסט</button>
-      <p class="note" id="pl-note" style="margin:10px 0 0"></p>
+      <h3>האזינו ב-Spotify</h3>
+      <p class="note">מאה השירים הטובים ביותר לפי דורון, בפלייליסט אחד.</p>
+      <a class="pl-copy" href="https://open.spotify.com/playlist/63rcctPCswMrsVokuyFmgw?si=392050c3dd464047" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;text-decoration:none">פתיחת הפלייליסט ב-Spotify</a>
       <div id="pl-embed"></div>
     </div>
     <div class="card span-7"><h3>השירים <small id="pl-count" style="font-weight:500;color:var(--muted);font-size:.9rem"></small></h3><ol class="nl pl-list" id="pl-list"></ol></div>
@@ -1108,56 +1089,13 @@ $('#tbl').addEventListener('click',e=>{if(e.target.closest('a'))return;const tr=
 setTab('a');
 /* ---------- playlist ---------- */
 (function(){
-  const PLAYLIST="";
+  const PLAYLIST="https://open.spotify.com/playlist/63rcctPCswMrsVokuyFmgw?si=392050c3dd464047";
   const T=S.filter(s=>s[8]).slice(0,100), withLink=T.filter(s=>SPT[s[0]]);
   $('#pl-count').textContent=`(${T.length})`;
   $('#pl-list').innerHTML=T.map(s=>`<li data-s="${s[0]}" tabindex="0" data-kbd role="button"><span class="nl-m"><b><bdi>${esc(s[1])}</bdi></b><span><bdi>${esc(s[2])}</bdi><span class="rkp"> · מקום ${s[0]}</span></span></span>${LKS(s)}</li>`).join('');
   $('#pl-list').addEventListener('click',e=>{if(e.target.closest('a'))return;const li=e.target.closest('li[data-s]');if(li)openSong(SBYID[li.dataset.s])});
-  const miss=T.filter(s=>!SPT[s[0]]);
-  $('#pl-note').textContent=miss.length?`${withLink.length} שירים יועתקו. ל-${miss.map(s=>s[1]).join(', ')} אין קישור ישיר, ואפשר להוסיף ${miss.length>1?'אותם':'אותו'} ידנית מכפתור החיפוש ברשימה.`:'';
-  $('#pl-copy-txt').onclick=()=>{const txt=T.map(s=>`${qArtist(s[2])} - ${s[1]}`).join('\n');
-    if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>toast(`${T.length} שירים הועתקו כטקסט`),()=>prompt('העתיקו:',txt));else prompt('העתיקו:',txt)};
-  $('#pl-copy').onclick=()=>{const txt=withLink.map(s=>SPT[s[0]].split('?')[0]).join('\n');
-    const done=()=>toast(`${withLink.length} קישורים הועתקו. עכשיו הדביקו בפלייליסט ב-Spotify`);
-    if(navigator.clipboard)navigator.clipboard.writeText(txt).then(done,()=>prompt('העתיקו:',txt));else prompt('העתיקו:',txt)};
-  /* one-tap creation via Spotify Web API (Authorization Code + PKCE; needs the owner's Client ID) */
-  const CID="", REDIR='https://dorcpa-music.github.io/';
-  const st=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
-  const b64u=buf=>btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  const rnd=n=>b64u(crypto.getRandomValues(new Uint8Array(n)));
-  const say=m=>{$('#pl-status').textContent=m};
-  const showEmbed=(url,id)=>{$('#pl-embed').innerHTML=`<iframe src="https://open.spotify.com/embed/playlist/${id}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="הפלייליסט ב-Spotify"></iframe><p class="note" style="margin:8px 0 0"><a href="${url}" target="_blank" rel="noopener">לפתיחת הפלייליסט ב-Spotify</a></p>`};
-  if(CID&&location.hostname==='dorcpa-music.github.io'){
-    $('#pl-oneclick').hidden=false;
-    $('#pl-create').onclick=async()=>{const v=rnd(64),s=rnd(16);st('sp_v',v);st('sp_s',s);
-      const ch=b64u(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)));
-      location.href='https://accounts.spotify.com/authorize?'+new URLSearchParams({response_type:'code',client_id:CID,redirect_uri:REDIR,code_challenge_method:'S256',code_challenge:ch,state:s,scope:'playlist-modify-private playlist-modify-public'})};
-    const q=new URLSearchParams(location.search);
-    if(q.get('code')||q.get('error')){
-      history.replaceState(null,'',location.pathname+'#playlist');
-      setTimeout(()=>$('#playlist').scrollIntoView(),300);
-      (async()=>{try{
-        if(q.get('error'))throw new Error('ההתחברות ל-Spotify בוטלה');
-        if(q.get('state')!==st('sp_s'))throw new Error('ההתחברות לא אומתה, נסו שוב');
-        say('מתחבר ל-Spotify…');
-        const tk=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',code:q.get('code'),redirect_uri:REDIR,client_id:CID,code_verifier:st('sp_v')})}).then(r=>r.json());
-        st('sp_v',null);st('sp_s',null);
-        if(!tk.access_token)throw new Error('לא התקבלה הרשאה מ-Spotify');
-        const H={Authorization:'Bearer '+tk.access_token,'Content-Type':'application/json'};
-        say('יוצר את הפלייליסט…');
-        const pr=await fetch('https://api.spotify.com/v1/me/playlists',{method:'POST',headers:H,body:JSON.stringify({name:'האוסף של דורון · 100 השירים',public:false,description:'100 השירים המדורגים ביותר מרשימות Rolling Stone ו-NME שנמצאים באוסף, לפי הדירוג המשולב. dorcpa-music.github.io'})});
-        if(!pr.ok)throw new Error(pr.status===403?'Spotify סירבה (403): צריך שהחשבון יהיה ברשימת המשתמשים של האפליקציה ועם Premium':'יצירת הפלייליסט נכשלה ('+pr.status+')');
-        const pl=await pr.json();
-        const uris=withLink.map(s=>'spotify:track:'+SPT[s[0]].split('/track/')[1].split('?')[0]);
-        const ar=await fetch(`https://api.spotify.com/v1/playlists/${pl.id}/items`,{method:'POST',headers:H,body:JSON.stringify({uris})});
-        if(!ar.ok)throw new Error('הוספת השירים נכשלה ('+ar.status+')');
-        say(`הפלייליסט נוצר עם ${uris.length} שירים.`+(miss.length?` את ${miss.map(s=>s[1]).join(', ')} צריך להוסיף ידנית.`:''));
-        showEmbed(pl.external_urls&&pl.external_urls.spotify||('https://open.spotify.com/playlist/'+pl.id),pl.id);
-      }catch(e){say(e.message)}})();
-    }
-  }
   if(PLAYLIST){const id=PLAYLIST.split('/playlist/')[1].split('?')[0];
-    $('#pl-embed').innerHTML=`<iframe src="https://open.spotify.com/embed/playlist/${id}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="הפלייליסט ב-Spotify"></iframe><p class="note" style="margin:8px 0 0"><a href="${PLAYLIST}" target="_blank" rel="noopener">לפתיחת הפלייליסט ב-Spotify</a></p>`}
+    $('#pl-embed').innerHTML=`<iframe src="https://open.spotify.com/embed/playlist/${id}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="הפלייליסט ב-Spotify"></iframe>`}
 })();
 
 
