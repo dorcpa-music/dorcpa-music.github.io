@@ -510,6 +510,7 @@ nav.top .lang-btn:hover{background:var(--violet);color:#fff}
 <body>
 
 
+
 <nav class="top"><div class="wrap">
   <a class="brand" href="#about" data-en="Doron&#x27;s Collection">האוסף של דורון</a>
   <a class="l" href="#about" data-en="About">על האוסף</a>
@@ -1175,7 +1176,7 @@ if('serviceWorker' in navigator&&location.protocol==='https:'&&location.hostname
     if(!name){msg.textContent=tx('נא למלא שם','Please enter your name');return}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent=tx('נא למלא כתובת מייל תקינה','Please enter a valid email address');return}
     btn.disabled=true; msg.textContent=tx('שולח... זה עשוי לקחת עד חצי דקה','Sending... this may take up to half a minute');
-    fetch('https://formsubmit.co/ajax/b3d1e8c90a88dbe45d7a9b51494ed25b',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    fetch('https://formsubmit.co/ajax/dorcpa.music@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({name:name,email:email,_subject:'הרשמה חדשה לעדכוני האתר: '+name,_template:'table',_captcha:'false',
         'שפה':EN?'English':'עברית','הודעה':'נרשם/ה חדש/ה לרשימת התפוצה של האוסף של דורון. יש להוסיף את הכתובת לקבוצה "רשימת תפוצה עדכונים לאתר".'})})
     .then(function(r){if(!r.ok)throw 0})
@@ -1185,5 +1186,6 @@ if('serviceWorker' in navigator&&location.protocol==='https:'&&location.hostname
   });
 })();
 </script>
+
 </body>
 </html>
