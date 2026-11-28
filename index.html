@@ -575,7 +575,7 @@ nav.top .lang-btn:hover{background:var(--violet);color:#fff}
       </div>
       <div class="verdict" data-en="&lt;b&gt;The official answer:&lt;/b&gt; it&#x27;s not an omission, it&#x27;s policy. But like any good accountant, I&#x27;ve entered the comment in the minutes, and the matter will be discussed next quarter. Who knows, maybe the next update will open with &lt;bdi&gt;Illmatic&lt;/bdi&gt;."><b>התשובה הרשמית:</b> זו לא השמטה, זו מדיניות. אבל כמו כל רואה חשבון טוב, רשמתי את ההערה בפרוטוקול, והנושא יעלה לדיון ברבעון הבא. מי יודע, אולי העדכון הבא ייפתח ב-<bdi>Illmatic</bdi>.</div>
     </article>
-    <article class="hh hh2">
+    <article class="hh hh2" id="gaon" style="scroll-margin-top:70px">
       <div>
         <div class="q" data-en="A question from the audience · A good friend who prefers to stay anonymous">שאלה מהקהל · חבר טוב שאינו רוצה להזדהות</div>
         <h3 data-en="And what about Israeli music? Especially the great Israeli singer, Yehoram Gaon?">ומה עם מוזיקה ישראלית? ובמיוחד עם כוכב הזמר הישראלי, יהורם גאון?</h3>
@@ -1182,6 +1182,7 @@ $('#tbl').addEventListener('click',e=>{if(e.target.closest('a'))return;const tr=
   tr.after(det);tr.classList.add('open');tr.setAttribute('aria-expanded','true');
 });
 setTab('a');
+if(location.hash==='#gaon')[300,1500].forEach(t=>setTimeout(()=>{const g=document.getElementById('gaon');g&&g.scrollIntoView({block:'start'})},t));
 
 /* ---------- Israeli rock: 50 albums from the book ---------- */
 (function(){
