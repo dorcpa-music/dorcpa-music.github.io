@@ -516,6 +516,20 @@ html[dir=ltr] tr.is-via td:first-child{box-shadow:inset 4px 0 0 var(--via)}
 html[dir=ltr] tr.is-both td:first-child{box-shadow:inset 4px 0 0 var(--both)}
 nav.top .lang-btn{position:sticky;inset-inline-end:0;margin-inline-start:auto;flex:none;font:inherit;font-size:.85rem;font-weight:600;color:var(--violet);background:#fff;border:1px solid var(--violet);border-radius:999px;padding:5px 14px;cursor:pointer;white-space:nowrap;box-shadow:0 0 0 24px #fcfbff}
 nav.top .lang-btn:hover{background:var(--violet);color:#fff}
+
+.hero-more{margin:14px 0 0;font-size:.92rem;color:var(--muted);max-width:640px}
+.hero-more b{color:var(--paper);font-family:var(--f-num)}
+.ed-note{font-size:.8rem;color:var(--muted);margin:10px 0 0;max-width:640px;line-height:1.6}
+.hero-ed{margin-top:12px}
+.fold-btn{display:none}
+@media (max-width:700px){
+  .band.folded>.wrap{max-height:var(--peek,620px);overflow:hidden;position:relative}
+  .band.folded>.wrap::after{content:"";position:absolute;inset:auto 0 0 0;height:140px;background:linear-gradient(180deg,transparent,var(--fold-bg,#f6f3ff));pointer-events:none}
+  .fold-btn{display:flex;margin:14px auto 0;align-items:center;gap:8px;font:inherit;font-weight:700;font-size:.92rem;color:var(--violet);background:#fff;border:1px solid #ddd3fb;border-radius:999px;padding:10px 20px;cursor:pointer;box-shadow:0 4px 14px rgba(91,33,214,.10)}
+  .band:not(.folded) .fold-btn .op{display:none}.band.folded .fold-btn .cl{display:none}
+}
+.big-stat span strong{color:var(--paper);font-family:var(--f-num)}.big-stat span small{display:block;font-size:.8em;opacity:.85}
+.hero .ed-note,.hero .hero-more{color:rgba(255,255,255,.8)}.hero .hero-more b{color:#fff}.hero .ed-note bdi{color:#fff}
 </style>
 </head>
 <body>
@@ -544,10 +558,12 @@ nav.top .lang-btn:hover{background:var(--violet);color:#fff}
     <h1 data-en="Doron&#x27;s &lt;em&gt;Collection&lt;/em&gt;">האוסף <em>של דורון</em></h1>
     <p class="lede" data-en="How many of the greatest albums and songs of all time are already on the shelf? Every item in the collection has been cross-checked against the top-500 lists of the two most important magazines in music.">כמה מהאלבומים והשירים הגדולים בכל הזמנים כבר נמצאים על המדף? כל פריט באוסף הוצלב מול רשימות 500 הגדולים של שני המגזינים החשובים בעולם המוזיקה.</p>
     <div class="tally">
-      <div><b id="t-alb">93<small>/785</small></b><span data-en="Albums from the lists">אלבומים מהרשימות</span></div>
-      <div><b id="t-song">282<small>/863</small></b><span data-en="Songs from the lists">שירים מהרשימות</span></div>
-      <div><b id="t-all">468</b><span data-en="Albums in the whole collection">אלבומים באוסף כולו</span></div>
+      <div><b id="t-top">8<small>/10</small></b><span data-en="Of the 10 greatest albums are on the shelf">מעשרת האלבומים הגדולים כבר על המדף</span></div>
+      <div><b id="t-alb">93</b><span data-en="Albums from the lists on the shelf">אלבומים מהרשימות על המדף</span></div>
+      <div><b id="t-song">282</b><span data-en="Songs from the lists in the collection">שירים מהרשימות באוסף</span></div>
     </div>
+    <p class="ed-note hero-ed">הרשימות: <bdi>Rolling Stone</bdi> מ-2020 (אלבומים) ו-2021 (שירים), <bdi>NME</bdi> מ-2013 (אלבומים) ו-2014 (שירים). רשימות NME ותיקות יותר, ולכן אין בהן אלבומים ושירים מהעשור האחרון.</p>
+    <p class="hero-more" data-en="And beyond the lists: &lt;b&gt;468&lt;/b&gt; albums in the whole collection · &lt;b&gt;40&lt;/b&gt; of the Top 100 albums · &lt;b&gt;55&lt;/b&gt; of the Top 100 songs">ומעבר לרשימות: <b>468</b> אלבומים באוסף כולו · <b>40</b> ממאה האלבומים הגדולים · <b>55</b> ממאה השירים הגדולים</p>
   </div>
   <div class="deck" id="deck" role="button" tabindex="0" aria-label="לחצו על התקליט לאלבום אקראי מהאוסף">
     <div class="platter"></div>
@@ -582,7 +598,7 @@ nav.top .lang-btn:hover{background:var(--violet);color:#fff}
         <p data-en="I checked the shelves twice and the balance sheet three times: no Yehoram Gaon. Not on vinyl, not on CD, not even on a cassette forgotten in the car. But a good question deserves an answer, so in its honour the site now has a whole new chapter: the 50 greatest Israeli rock albums, from the High Windows to Rona Kenan, marking which are already on the shelf and which are still waiting in line. Thanks to the friend who prefers to stay anonymous. Your identity is safe with me, filed together with the receipts.">בדקתי את המדפים פעמיים ואת המאזן שלוש פעמים: יהורם גאון לא נמצא. לא בתקליט, לא בדיסק ואפילו לא בקלטת ששכחו באוטו. אבל שאלה טובה לא משאירים בלי מענה, ולכן לכבוד השאלה נפתח באתר פרק חדש לגמרי: 50 אלבומי הרוק הישראלי הגדולים, מהחלונות הגבוהים ועד רונה קינן, עם סימון מה כבר על המדף ומה עוד מחכה בתור. תודה לחבר שאינו רוצה להזדהות. הזהות שלך שמורה אצלי, יחד עם הקבלות.</p>
       </div>
       <div class="nums">
-        <div><b id="il-n-own">0</b><span data-en="Israeli rock classics on my shelf">אלבומי רוק ישראלי מתוך 50 על המדף</span></div>
+        <div><b id="il-n-own">4</b><span data-en="Israeli rock classics on my shelf">אלבומי רוק ישראלי מתוך 50 על המדף</span></div>
         <div><b>0</b><span data-en="Yehoram Gaon albums">אלבומים של יהורם גאון</span></div>
       </div>
       <div class="verdict" data-en="&lt;b&gt;The bottom line:&lt;/b&gt; Yehoram Gaon has been entered in the books as an &quot;open liability&quot;. Meanwhile, Arik Einstein and Shalom Hanoch are minding the store."><b>השורה התחתונה:</b> יהורם גאון נרשם בספרים כ"התחייבות פתוחה". בינתיים, אריק איינשטיין ושלום חנוך מחזיקים את הבסטה.</div>
@@ -614,13 +630,14 @@ nav.top .lang-btn:hover{background:var(--violet);color:#fff}
       <h3 data-en="And how was Doron&#x27;s list made?">ואיך נוצרה הרשימה של דורון?</h3>
       <p class="lede2" data-en="I&#x27;m an accountant, so naturally the collection didn&#x27;t stay a pile of records. It was recorded, classified and fully reconciled against two external sources. It&#x27;s the closest thing to an audit a record collection can get.">אני רואה חשבון, אז ברור שהאוסף לא נשאר ערימה של תקליטים. הוא עבר רישום, סיווג והתאמה מלאה מול שני מקורות חיצוניים. זה הכי קרוב לביקורת חשבונות שתקליטים יכולים לעבור.</p>
       <div class="steps">
-        <div class="step" data-en="&lt;h4&gt;Inventory&lt;/h4&gt;&lt;p&gt;Every record, CD, &lt;bdi&gt;Blu-ray&lt;/bdi&gt; and &lt;bdi&gt;SACD&lt;/bdi&gt; is logged in the &lt;bdi&gt;CLZ Music&lt;/bdi&gt; app, including the full track list. ${OWN} albums, and not one counted twice.&lt;/p&gt;"><h4>רישום מלאי</h4><p>כל תקליט, דיסק, <bdi>Blu-ray</bdi> ו-<bdi>SACD</bdi> נרשם באפליקציית <bdi>CLZ Music</bdi>, כולל רשימת השירים המלאה. ${OWN} אלבומים, ואף אחד לא נספר פעמיים.</p></div>
+        <div class="step" data-en="&lt;h4&gt;Inventory&lt;/h4&gt;&lt;p&gt;Every record, CD, &lt;bdi&gt;Blu-ray&lt;/bdi&gt; and &lt;bdi&gt;SACD&lt;/bdi&gt; is logged in the &lt;bdi&gt;CLZ Music&lt;/bdi&gt; app, including the full track list. 468 albums, and not one counted twice.&lt;/p&gt;"><h4>רישום מלאי</h4><p>כל תקליט, דיסק, <bdi>Blu-ray</bdi> ו-<bdi>SACD</bdi> נרשם באפליקציית <bdi>CLZ Music</bdi>, כולל רשימת השירים המלאה. 468 אלבומים, ואף אחד לא נספר פעמיים.</p></div>
         <div class="step" data-en="&lt;h4&gt;Merging the lists&lt;/h4&gt;&lt;p&gt;The two album lists were merged into a single list of 785 albums, and the two song lists into 863 songs. Anything on both is counted once.&lt;/p&gt;"><h4>איחוד הרשימות</h4><p>שתי רשימות האלבומים אוחדו לרשימה אחת של 785 אלבומים, ושתי רשימות השירים ל-863 שירים. מה שמופיע בשתיהן נספר פעם אחת.</p></div>
         <div class="step" data-en="&lt;h4&gt;The combined ranking&lt;/h4&gt;&lt;p&gt;The ranking is the average of the two positions. An item that appears on only one list gets position 501 on the other. In professional terms: a disallowed expense.&lt;/p&gt;"><h4>הדירוג המשולב</h4><p>הדירוג הוא הממוצע של שני המקומות. פריט שמופיע רק ברשימה אחת מקבל ברשימה השנייה את מקום 501. בשפה מקצועית: הוצאה שלא הוכרה.</p></div>
         <div class="step" data-en="&lt;h4&gt;The reconciliation&lt;/h4&gt;&lt;p&gt;Every album in the collection was checked against the list. Every song was also checked against the track lists of all the albums, so a song that&#x27;s only on a greatest-hits or live album still counts.&lt;/p&gt;"><h4>ההתאמה</h4><p>כל אלבום באוסף הוצלב מול הרשימה. כל שיר נבדק גם מול רשימות השירים של כל האלבומים, כך שגם שיר שנמצא רק באוסף להיטים או בהופעה נספר.</p></div>
-        <div class="step" data-en="&lt;h4&gt;Ongoing updates&lt;/h4&gt;&lt;p&gt;Since April 2026 the collection has been updated after every purchase. This is the seventh update. The gap between ${OWNL} and 785 isn&#x27;t a shortfall, it&#x27;s the acquisitions budget for the years ahead.&lt;/p&gt;"><h4>עדכון שוטף</h4><p>מאז אפריל 2026 האוסף מתעדכן אחרי כל קנייה. זה העדכון השביעי. הפער בין ${OWNL} ל-785 הוא לא חוסר, הוא תקציב רכש לשנים הבאות.</p></div>
+        <div class="step" data-en="&lt;h4&gt;Ongoing updates&lt;/h4&gt;&lt;p&gt;Since April 2026 the collection has been updated after every purchase. This is the seventh update. The gap between 93 and 785 isn&#x27;t a shortfall, it&#x27;s the acquisitions budget for the years ahead.&lt;/p&gt;"><h4>עדכון שוטף</h4><p>מאז אפריל 2026 האוסף מתעדכן אחרי כל קנייה. זה העדכון השביעי. הפער בין 93 ל-785 הוא לא חוסר, הוא תקציב רכש לשנים הבאות.</p></div>
       </div>
       <p class="lede2" style="margin:22px 0 0" data-en="So who&#x27;s right, &lt;bdi&gt;Rolling Stone&lt;/bdi&gt; with Marvin Gaye or &lt;bdi&gt;NME&lt;/bdi&gt; with the Smiths? Both are on my shelf, so I&#x27;m exempt from ruling.">ומי צודק, <bdi>Rolling Stone</bdi> עם מרווין גיי או <bdi>NME</bdi> עם הסמיתס? שניהם נמצאים אצלי על המדף, כך שאני פטור מלהכריע.</p>
+      <p class="ed-note">הרשימות: <bdi>Rolling Stone</bdi> מ-2020 (אלבומים) ו-2021 (שירים), <bdi>NME</bdi> מ-2013 (אלבומים) ו-2014 (שירים). רשימות NME ותיקות יותר, ולכן אין בהן אלבומים ושירים מהעשור האחרון.</p>
       <div class="sign" data-en="— Doron">— דורון</div>
     </article>
   </div>
@@ -722,15 +739,15 @@ nav.top .lang-btn:hover{background:var(--violet);color:#fff}
 </div></section>
 
 <section class="band" id="il-rock"><div class="wrap">
-  <div class="sec-head"><div class="side">IL</div><h2 data-en="Israeli Rock &amp;#x27;n&amp;#x27; Roll">רוקנרול ישראלי</h2><p data-en="The 50 blue-and-white rock albums chosen in the book &amp;quot;Israeli Rock &amp;#x27;n&amp;#x27; Roll: 50 Israeli Rock Albums That Made Noise&amp;quot;. No ranking, by year of release. Albums on my shelf are in full colour; the rest are dimmed. Click any cover.">50 אלבומי הרוק הכחול-לבן שנבחרו בספר "רוקנרול ישראלי: 50 אלבומי רוק כחול לבן שעשו רעש!". בלי דירוג, לפי שנת היציאה. אלבומים שנמצאים אצלי על המדף בצבע מלא, השאר מוחשכים. אפשר ללחוץ על כל עטיפה.</p></div>
+  <div class="sec-head"><div class="side">IL</div><h2 data-en="Israeli Rock &#x27;n&#x27; Roll">רוקנרול ישראלי</h2><p data-en="The 50 blue-and-white rock albums chosen in the book &quot;Israeli Rock &#x27;n&#x27; Roll: 50 Israeli Rock Albums That Made Noise&quot;. No ranking, by year of release. Albums on my shelf are in full colour; the rest are dimmed. Click any cover.">50 אלבומי הרוק הכחול-לבן שנבחרו בספר "רוקנרול ישראלי: 50 אלבומי רוק כחול לבן שעשו רעש!". בלי דירוג, לפי שנת היציאה. אלבומים שנמצאים אצלי על המדף בצבע מלא, השאר מוחשכים. אפשר ללחוץ על כל עטיפה.</p></div>
   <div class="grid" style="margin-bottom:18px">
-    <div class="card span-4"><h3 data-en="On the shelf">על המדף</h3><p class="note" data-en="Of the 50 albums in the book">מתוך 50 האלבומים בספר</p><div class="big-stat"><b id="il-pct"></b><span id="il-of"></span></div><div class="stack" id="il-stack"></div><div class="keys" id="il-keys"></div></div>
+    <div class="card span-4"><h3 data-en="Represented in the collection">מיוצגים באוסף</h3><p class="note" data-en="Of the 50 albums in the book">מתוך 50 האלבומים בספר</p><div class="big-stat"><b id="il-pct">14</b><span id="il-of"></span></div><div class="stack" id="il-stack"></div><div class="keys" id="il-keys"></div></div>
     <div class="card span-4"><h3 data-en="By decade">לפי עשור</h3><p class="note" data-en="How many of the 50 are from each decade, and how many of them I have">כמה מה-50 מכל עשור, וכמה מהם אצלי</p><div class="bars" id="il-dec"></div></div>
     <div class="card span-4"><h3 data-en="The artists are already here">האמנים כבר כאן</h3><p class="note" data-en="Artists from the book who appear in my collection on other albums (live albums, compilations)">אמנים מהספר שמופיעים באוסף שלי באלבומים אחרים, כמו הופעות ואוספים</p><div id="il-art"></div></div>
   </div>
   <div class="wall-tools">
     <button class="chip" type="button" id="il-all" aria-pressed="true" data-en="All 50">כל ה-50</button>
-    <button class="chip" type="button" id="il-own" aria-pressed="false" data-en="Only what&amp;#x27;s on the shelf">רק מה שבאוסף</button>
+    <button class="chip" type="button" id="il-own" aria-pressed="false" data-en="Only what&#x27;s on the shelf">רק מה שבאוסף</button>
     <span class="hint" id="il-hint"></span>
   </div>
   <div class="wall il-wall" id="ilwall"></div>
@@ -781,6 +798,7 @@ nav.top .lang-btn:hover{background:var(--violet);color:#fff}
   <div data-en="&lt;b&gt;How is the combined ranking calculated?&lt;/b&gt; If an album or song appears on both lists, its ranking is the average of the two positions. If it appears on only one list, the other list counts as position 501."><b>איך מחושב הדירוג המשולב?</b> אם אלבום או שיר מופיעים בשתי הרשימות, הדירוג הוא הממוצע של שני המקומות. אם הם מופיעים רק ברשימה אחת, הרשימה השנייה נספרת כמקום 501.</div>
   <div data-en="&lt;b&gt;Sources:&lt;/b&gt; The 500 Greatest Albums and 500 Greatest Songs lists of &lt;bdi&gt;Rolling Stone&lt;/bdi&gt; (2020 and 2021) and &lt;bdi&gt;NME&lt;/bdi&gt; (2013 and 2014). Collection data from &lt;bdi&gt;CLZ Music&lt;/bdi&gt;."><b>מקורות:</b> רשימות 500 האלבומים ו-500 השירים הגדולים של <bdi>Rolling Stone</bdi> (2020 ו-2021) ושל <bdi>NME</bdi> (2013 ו-2014). נתוני האוסף מתוכנת <bdi>CLZ Music</bdi>.</div>
   <div class="credit" data-en="&lt;b&gt;Special thanks to Dana Argov&lt;/b&gt;&lt;span&gt;for the sharp eye and the comments that made this site better: the font, the names, the wording, and the question about hip-hop.&lt;/span&gt;"><b>תודה מיוחדת לדנה ארגוב</b><span>על העין החדה וההערות שהפכו את האתר לטוב יותר: הפונט, השמות, המילים, והשאלה על ההיפ־הופ.</span></div>
+  <div class="credit" data-en="&lt;b&gt;Thanks to the friend who prefers to stay anonymous, and to Claude&lt;/b&gt;&lt;span&gt;for the round of improvements: fixing bugs, putting what's on the shelf up front, dating the lists, and a shorter page on the phone.&lt;/span&gt;"><b>תודה לחבר שאינו רוצה להזדהות, ול-Claude</b><span>על מקצה השיפורים: תיקוני באגים, הבלטה של מה שכבר על המדף, ציון שנות הרשימות, ודף קצר ונוח יותר בטלפון.</span></div>
   <div data-en="© Doron Argov · The music collection">© דורון ארגוב · האוסף המוזיקלי</div>
 </div></footer>
 
@@ -846,14 +864,12 @@ function art(key){
 
 /* ---------- hero / counts ---------- */
 const aOwn=L.filter(r=>r[7]).length, sOwn=S.filter(r=>r[8]).length, sVia=S.filter(r=>r[8]&&r[10]).length;
-$('#t-alb').innerHTML=`${aOwn}<small>/${L.length}</small>`;
-$('#t-song').innerHTML=`${sOwn}<small>/${S.length}</small>`;
-$('#t-all').textContent=aOwn+P.length;
+$('#t-alb').textContent=aOwn;$('#t-song').textContent=sOwn;$('#t-top').innerHTML=`${L.slice(0,10).filter(r=>r[7]).length}<small>/10</small>`;
 $('#pcount').textContent=P.length;
 $('#acount').textContent=(L.length+P.length).toLocaleString('en');
 const HI=EX.HIST,hc=HI[HI.length-1],hp=HI[HI.length-2];
 document.querySelector('.eyebrow').textContent=`Rolling Stone × NME · ${tx('עודכן','Updated')} ${hc.date}`;
-document.querySelectorAll('.step p').forEach(p=>{p.innerHTML=p.innerHTML.replace('${OWN}',aOwn+P.length).replace('${OWNL}',aOwn)});
+document.querySelectorAll('.ed-note').forEach(e=>e.innerHTML=tx('הרשימות: <bdi>Rolling Stone</bdi> מ-2020 (אלבומים) ו-2021 (שירים), <bdi>NME</bdi> מ-2013 (אלבומים) ו-2014 (שירים). רשימות NME ותיקות יותר, ולכן אין בהן אלבומים ושירים מהעשור האחרון.','The lists: <bdi>Rolling Stone</bdi> from 2020 (albums) and 2021 (songs), <bdi>NME</bdi> from 2013 (albums) and 2014 (songs). The NME lists are older, so they have nothing from the last decade.'));
 
 /* ---------- wall ---------- */
 const TOP=L.slice(0,100);
@@ -879,8 +895,8 @@ $('#wallgrid').addEventListener('click',e=>{const b=e.target.closest('.sleeve');
 
 /* ---------- side A ---------- */
 const both=L.filter(r=>r[4]&&r[5]);
-$('#a-pct').textContent=(aOwn/L.length*100).toFixed(1)+'%';
-$('#a-of').textContent=tx(`${aOwn} מתוך ${L.length} אלבומים`,`${aOwn} of ${L.length} albums`);
+$('#a-pct').textContent=aOwn;
+{const t10=L.slice(0,10).filter(r=>r[7]).length,t100=L.slice(0,100).filter(r=>r[7]).length;$('#a-of').innerHTML=tx(`אלבומים על המדף, כולל <strong>${t10}</strong> מעשרת הגדולים ו-<strong>${t100}</strong> ממאה הגדולים <small>(מתוך ${L.length} ברשימות)</small>`,`albums on the shelf, including <strong>${t10}</strong> of the top 10 and <strong>${t100}</strong> of the top 100 <small>(of ${L.length} on the lists)</small>`)}
 const aBoth=L.filter(r=>r[7]&&r[4]&&r[5]).length;
 $('#a-stack').innerHTML=`<i style="width:${aBoth/L.length*100}%;background:var(--gold)"></i><i style="width:${(aOwn-aBoth)/L.length*100}%;background:var(--own)"></i>`;
 $('#a-keys').innerHTML=`<span><i style="background:var(--gold)"></i>${tx('מופיעים בשתי הרשימות','On both lists')} · ${aBoth}</span><span><i style="background:var(--own)"></i>${tx('ברשימה אחת','On one list')} · ${aOwn-aBoth}</span><span><i style="background:#ebe5fb"></i>${tx('לא באוסף','Not in the collection')} · ${L.length-aOwn}</span>`;
@@ -914,8 +930,8 @@ $('#podium').innerHTML=pod(T10,(r,i)=>`<div class="p" data-a="${r[0]}" data-kbd 
 $('#podium').addEventListener('click',e=>{const p=e.target.closest('.p');if(p)openAlbum(L.find(r=>r[0]==p.dataset.a))});
 
 /* ---------- side B ---------- */
-$('#s-pct').textContent=(sOwn/S.length*100).toFixed(1)+'%';
-$('#s-of').textContent=tx(`${sOwn} מתוך ${S.length} שירים`,`${sOwn} of ${S.length} songs`);
+$('#s-pct').textContent=sOwn;
+{const t10=S.slice(0,10).filter(r=>r[8]).length,t100=S.slice(0,100).filter(r=>r[8]).length;$('#s-of').innerHTML=tx(`שירים באוסף, כולל <strong>${t10}</strong> מעשרת הגדולים ו-<strong>${t100}</strong> ממאה הגדולים <small>(מתוך ${S.length} ברשימות)</small>`,`songs in the collection, including <strong>${t10}</strong> of the top 10 and <strong>${t100}</strong> of the top 100 <small>(of ${S.length} on the lists)</small>`)}
 $('#s-stack').innerHTML=`<i style="width:${(sOwn-sVia)/S.length*100}%;background:var(--own)"></i><i style="width:${sVia/S.length*100}%;background:var(--via)"></i>`;
 $('#s-keys').innerHTML=`<span><i style="background:var(--own)"></i>${tx('באלבום המקורי','On the original album')} · ${sOwn-sVia}</span><span><i style="background:var(--via)"></i>${tx('באוסף להיטים או בהופעה','On a greatest-hits or live album')} · ${sVia}</span><span><i style="background:#ebe5fb"></i>${tx('לא באוסף','Not in the collection')} · ${S.length-sOwn}</span>`;
 const bar=(n,p,v,g)=>`<div class="bar"><span class="n" title="${esc(n)}">${esc(n)}</span><span class="t"><i class="${g?'g':''}" style="width:${Math.min(100,p)}%"></i></span><span class="v">${v}</span></div>`;
@@ -1190,8 +1206,8 @@ if(location.hash==='#gaon')[300,1500].forEach(t=>setTimeout(()=>{const g=documen
   const ilNames=x=>(x.n||[x.a]).map(n=>`<a href="#" class="il-artist" data-n="${esc(n)}"><bdi>${esc(n)}</bdi></a>`).join(tx(' ו',' & '));
   const own=IL.filter(x=>x.own).length, part=IL.filter(x=>!x.own&&x.p&&x.p.length).length;
   $('#il-n-own').textContent=own;
-  $('#il-pct').textContent=own+'/50';
-  $('#il-of').textContent=tx(`${part} נוספים: האמן באוסף באלבום אחר`,`${part} more: the artist is in the collection on another album`);
+  $('#il-pct').textContent=own+part;
+  $('#il-of').textContent=tx(`${own} האלבומים עצמם על המדף, ועוד ${part} אמנים שכבר נמצאים באוסף באלבום אחר`,`${own} of the albums themselves are on the shelf, plus ${part} artists already in the collection on another album`);
   $('#il-stack').innerHTML=`<i style="width:${own*2}%;background:var(--gold)"></i><i style="width:${part*2}%;background:#16a34a"></i>`;
   $('#il-keys').innerHTML=`<span><i style="background:var(--gold)"></i>${tx('האלבום אצלי','I have the album')} · ${own}</span><span><i style="background:#16a34a"></i>${tx('האמן באוסף','Artist in the collection')} · ${part}</span><span><i style="background:#ebe5fb"></i>${tx('עוד לא','Not yet')} · ${50-own-part}</span>`;
   const dc={};IL.forEach(x=>{const d=Math.floor(x.y/10)*10;(dc[d]=dc[d]||{n:0,o:0}).n++;if(x.own)dc[d].o++});
@@ -1249,6 +1265,26 @@ if(location.hash==='#gaon')[300,1500].forEach(t=>setTimeout(()=>{const g=documen
 })();
 
 
+
+/* ---------- mobile: long chapters open on demand ---------- */
+(function(){
+  const FOLD=['about','wall','wall-s','playlist','side-a','side-b','news','il-rock','shelf'];
+  const mq=matchMedia('(max-width:700px)');
+  const secs=FOLD.map(id=>document.getElementById(id)).filter(Boolean);
+  secs.forEach(sec=>{
+    const bg=getComputedStyle(sec).backgroundColor; if(bg&&bg!=='rgba(0, 0, 0, 0)')sec.style.setProperty('--fold-bg',bg);
+    const b=document.createElement('button');b.type='button';b.className='fold-btn';
+    b.innerHTML=`<span class="op">${tx('לכל הפרק','Show the whole chapter')} ▾</span><span class="cl">${tx('לצמצם את הפרק','Collapse the chapter')} ▴</span>`;
+    b.onclick=()=>{const f=sec.classList.toggle('folded');if(f)sec.scrollIntoView({block:'start'})};
+    sec.appendChild(b);
+  });
+  const apply=()=>secs.forEach(sec=>sec.classList.toggle('folded',mq.matches&&!sec.contains(target())));
+  const target=()=>{const h=location.hash.slice(1);if(!h||/^(a|s|p|artist)\//.test(h))return null;try{return document.getElementById(decodeURIComponent(h))}catch(e){return null}};
+  const open=el=>{const sec=el&&el.closest('.band');if(sec)sec.classList.remove('folded')};
+  apply();
+  document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href').slice(1);if(id)open(document.getElementById(id))},true);
+  addEventListener('hashchange',()=>{const t=target();if(t){open(t);t.scrollIntoView({block:'start'})}});
+})();
 /* random album from the record */
 const OWNED=[...L.filter(r=>r[7]),...P];
 $('#deck').addEventListener('click',()=>{const d=$('#deck');d.classList.add('spin');setTimeout(()=>{d.classList.remove('spin');openAlbum(OWNED[Math.floor(Math.random()*OWNED.length)])},650)});
