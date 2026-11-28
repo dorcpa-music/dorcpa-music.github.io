@@ -514,7 +514,11 @@ html[dir=ltr] .aside{border-right:0;border-left:3px solid var(--gold);padding-ri
 html[dir=ltr] tr.is-own td:first-child{box-shadow:inset 4px 0 0 var(--own)}
 html[dir=ltr] tr.is-via td:first-child{box-shadow:inset 4px 0 0 var(--via)}
 html[dir=ltr] tr.is-both td:first-child{box-shadow:inset 4px 0 0 var(--both)}
-nav.top .lang-btn{position:sticky;inset-inline-end:0;margin-inline-start:auto;flex:none;font:inherit;font-size:.85rem;font-weight:600;color:var(--violet);background:#fff;border:1px solid var(--violet);border-radius:999px;padding:5px 14px;cursor:pointer;white-space:nowrap;box-shadow:0 0 0 24px #fcfbff}
+nav.top .nav-end{position:sticky;inset-inline-end:0;margin-inline-start:auto;flex:none;display:flex;gap:8px;align-items:center;background:#fcfbff;box-shadow:0 0 0 24px #fcfbff}
+nav.top .srch-btn{display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;color:#fff;background:var(--violet);border-radius:999px;padding:6px 14px;text-decoration:none;white-space:nowrap}
+nav.top .srch-btn:hover{filter:brightness(1.1)}
+@media (max-width:520px){nav.top .srch-btn span{display:none}nav.top .srch-btn{padding:7px 10px}}
+nav.top .lang-btn{flex:none;font:inherit;font-size:.85rem;font-weight:600;color:var(--violet);background:#fff;border:1px solid var(--violet);border-radius:999px;padding:5px 14px;cursor:pointer;white-space:nowrap}
 nav.top .lang-btn:hover{background:var(--violet);color:#fff}
 
 .hero-more{margin:14px 0 0;font-size:.92rem;color:var(--muted);max-width:640px}
@@ -549,7 +553,7 @@ nav.top .lang-btn:hover{background:var(--violet);color:#fff}
   <a class="l" href="#news" data-en="What&#x27;s New">מה חדש</a>
   <a class="l" href="#library" data-en="Full Search">החיפוש המלא</a>
   <a class="l" href="#join" data-en="Email Updates">עדכונים במייל</a>
-  <button type="button" class="lang-btn" id="lang-btn"></button>
+  <div class="nav-end"><a class="srch-btn" id="srch-btn" href="#library" aria-label="החיפוש המלא" data-en-aria="Full search"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span data-en="Full search">חיפוש מלא</span></a><button type="button" class="lang-btn" id="lang-btn"></button></div>
 </div></nav>
 
 <header class="hero" id="top"><div class="wrap">
@@ -1286,6 +1290,9 @@ if(location.hash==='#gaon')[300,1500].forEach(t=>setTimeout(()=>{const g=documen
   document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href').slice(1);if(id)open(document.getElementById(id))},true);
   addEventListener('hashchange',()=>{const t=target();if(t){open(t);t.scrollIntoView({block:'start'})}});
 })();
+
+if(EN)document.getElementById('srch-btn').setAttribute('aria-label','Full search');
+document.getElementById('srch-btn').addEventListener('click',e=>{e.preventDefault();const lib=document.getElementById('library');lib.classList.remove('folded');lib.scrollIntoView({block:'start'});setTimeout(()=>{const q=document.getElementById('q');if(q)q.focus({preventScroll:true})},350)});
 /* random album from the record */
 const OWNED=[...L.filter(r=>r[7]),...P];
 $('#deck').addEventListener('click',()=>{const d=$('#deck');d.classList.add('spin');setTimeout(()=>{d.classList.remove('spin');openAlbum(OWNED[Math.floor(Math.random()*OWNED.length)])},650)});
