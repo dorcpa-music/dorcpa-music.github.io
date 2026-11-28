@@ -526,7 +526,9 @@ html[dir=ltr] .aside{border-right:0;border-left:3px solid var(--gold);padding-ri
 html[dir=ltr] tr.is-own td:first-child{box-shadow:inset 4px 0 0 var(--own)}
 html[dir=ltr] tr.is-via td:first-child{box-shadow:inset 4px 0 0 var(--via)}
 html[dir=ltr] tr.is-both td:first-child{box-shadow:inset 4px 0 0 var(--both)}
-nav.top .nav-end{position:sticky;inset-inline-end:0;margin-inline-start:auto;flex:none;display:flex;gap:8px;align-items:center;background:#fcfbff;box-shadow:0 0 0 24px #fcfbff}
+nav.top .nav-end{position:sticky;inset-inline-end:0;margin-inline-start:auto;flex:none;display:flex;gap:8px;align-items:center;background:#fcfbff;padding-inline-start:10px}
+@media (max-width:1180px){nav.top .nav-end{box-shadow:-14px 0 14px -4px #fcfbff}}
+@media (min-width:821px){nav.top .wrap{gap:18px}}
 nav.top .srch-btn{display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;color:#fff;background:var(--violet);border-radius:999px;padding:6px 14px;text-decoration:none;white-space:nowrap}
 nav.top .srch-btn:hover{filter:brightness(1.1)}
 @media (max-width:520px){nav.top .srch-btn span{display:none}nav.top .srch-btn{padding:7px 10px}}
